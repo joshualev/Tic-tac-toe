@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="app.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&family=Walter+Turncoat&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+        </style>
+</head>
+<body class="body">
+
+    <!-- Heading -->
+    <h1 class="heading">TIC TAC TOE</h1>
+    <!---->
+
+    <div id="game-message" class="gameMessageHidden"></div>
+    <!-- Tic Tac Toe Board -->
+    <div id=board-container class="boardContainer">
+        <div data-index="1" class="tile"></div>
+        <div data-index="2" class="tile"></div>
+        <div data-index="3" class="tile"></div>
+        <div data-index="4" class="tile"></div>
+        <div data-index="5" class="tile"></div>
+        <div data-index="6" class="tile"></div>
+        <div data-index="7" class="tile"></div>
+        <div data-index="8" class="tile"></div>
+        <div data-index="9" class="tile"></div>
+    </div>
+    <!---->
+
+    <!-- restartGame -->
+    <div id="restartBtn"class="restartGameVisible">RESTART</div>
+    <!---->
+
+    <!-- player turn message -->
+    <h2 id="playerTurnMsg" class="playerMoveHidden"></h2>
+    <!---->
+
+    <!-- score keeper -->
+        <div class="score">
+            <div class="scoreboardTitle">SCOREBOARD </div>
+            <div class="refreshImgContainer"><img class="refreshScoreBtn" src="https://www.iconsdb.com/icons/preview/white/sinchronize-xxl.png" alt="refresh score"></div>
+            <div class="playerxScoreLabel">PLAYER X <div id="playerXscore" class="playerxScoreDisplay">0</div></div>
+            <div class="playeroScoreLabel">PLAYER O <div id="playerOscore" class="playeroScoreDisplay">0</div></div>
+        </div>
+    <!---->
+
+    <!-- gameover -->
+    <div id="game-over-area" class="hidden">
+        <h2 class="gameOverText"></h2>
+        <button class="playAgain">PLAY AGAIN</button>
+    </div>
+    <!---->
+    
+    <div class="ai-button-container">
+        <div id="aiButton">
+            <div class="aiInfo">CHOOSE AI PLAYER</div>
+            <div id="aiXclass">X</div>
+            <div id="aiOclass">O</div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
