@@ -1,26 +1,31 @@
-// RETREIVE HTML ELEMENTS
-/////////////////////////////////////////////////////////
-//////////////ALL 9 TILES ON BOARD SELECTED//////////////
+                // RETREIVE HTML ELEMENTS //
+//////////////ALL 9 TILES ON BOARD SELECTED////////////////
 const tiles = document.querySelectorAll('.tile');
 
-/////////////////////////////////////////////////////////
-///////////////GAME OVER SCREEN COMPONENTS///////////////
+///////////////////////////////////////////////////////////
+///////////////GAME OVER SCREEN COMPONENTS/////////////////
 const gameOverArea = document.querySelector('#game-over-area')  
 const gameOverText = document.querySelector('.gameOverText')   
 const playAgain = document.querySelector('.playAgain')    
 
-/////////////////////////////////////////////////////////
-/////////////BUTTON + INTERACTIVE COMPONENTS/////////////
+///////////////////////////////////////////////////////////
+/////////////RESET GAME PARAMETER COMPONENTS///////////////
 const restartBtn = document.querySelector('#restartBtn')         
+const refreshScoreBtn = document.querySelector('.refreshScoreBtn') 
+
+///////////////////////////////////////////////////////////
+/////////////////////IN GAME MESSAGES//////////////////////
 const playerTurnMsg = document.querySelector('#playerTurnMsg') 
 const gameMessage = document.querySelector('#game-message')
-const refreshScoreBtn = document.querySelector('.refreshScoreBtn') 
+
+///////////////////////////////////////////////////////////
+///////////////////////AI INTERATIONS//////////////////////
 const aiToggleBtn = document.querySelector('#aiButton')
 const aiXclass = document.querySelector('#aiXclass')
 const aiOclass = document.querySelector('#aiOclass')
 
-/////////////////////////////////////////////////////////
-////////////////////CREATE PLAYER OBJECTS////////////////
+///////////////////////////////////////////////////////////
+////////////////////CREATE PLAYER OBJECTS//////////////////
 const playerX = {
     aiPlayer: false,
     symbol: "X",
@@ -28,7 +33,6 @@ const playerX = {
     score: 0,
     scoreDisplay: document.querySelector('#playerXscore'),
 }
-
 const playerO = {
     aiPlayer: false,
     symbol: "O",
@@ -36,11 +40,10 @@ const playerO = {
     score: 0,
     scoreDisplay: document.querySelector('#playerOscore'), 
 }
-
 let playerTurn = playerX;
 
 ///////////////////////////////////////////////////////////
-///////////BOARD STATE AND WINNING COMBINATIONS///////////
+/////////TRACK BOARD STATE AND WINNING COMBINATIONS////////
 const boardState = ["","","","","","","","",""]
 const winningConditions = [
     [1, 2, 3],
@@ -55,36 +58,35 @@ const winningConditions = [
 
 ///////////////////////////////////////////////////////////
 /////SELECT AI AS PLAYER ON CLICK (RESPECTIVE BUTTONS)/////
-  aiXclass.addEventListener('click', playerXasAI)
-  aiOclass.addEventListener('click', playerOasAI)
+aiXclass.addEventListener('click', playerXasAI)
+aiOclass.addEventListener('click', playerOasAI)
 
 ///////////////////////////////////////////////////////////
-////////////LISTEN FOR CLICK ON RESET BUTTON//////////////
-refreshScoreKeeper()/////////////////////////////////////
+////////////LISTEN FOR CLICK ON RESET BUTTON///////////////
+refreshScoreKeeper()
 function refreshScoreKeeper() {
     refreshScoreBtn.addEventListener('click',refreshScores)
 }
 
 ///////////////////////////////////////////////////////////
-/////////LISTEN FOR CLICK ON RESET/RESTART BUTTON/////////
-resetButton()////////////////////////////////////////////
+/////////LISTEN FOR CLICK ON RESET/RESTART BUTTON//////////
+resetButton()
 function resetButton() {
 playAgain.addEventListener('click',resetGameFunction)
 restartBtn.addEventListener('click',resetGameFunction)
 }
 
 ///////////////////////////////////////////////////////////
-////////////LISTEN FOR CLICK ON ALL TILES/////////////////
-onclick()////////////////////////////////////////////////
+////////////LISTEN FOR CLICK ON ALL TILES//////////////////
+onclick()
 function onclick() {
     tiles.forEach((tile) => {
         tile.addEventListener('click',handleTileClick)
     })
 }
 
-/////////////////////////////////////////////////////////
-///////////EXECUTE OUR FUNCTION ON CELL CLICKS//////////
-///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+///////////EXECUTE OUR FUNCTION ON CELL CLICKS/////////////
 function handleTileClick(event){
     const tile = event.target
     const tileIndex = tile.dataset.index
@@ -123,8 +125,7 @@ function handleTileClick(event){
 }
 
 ///////////////////////////////////////////////////////////
-///////////////CHANGE PLAYER TURN, ADD POINT//////////////
-/////////////////////////////////////////////////////////
+///////////////CHANGE PLAYER TURN, ADD POINT///////////////
 function makeMove (tile,tileIndex) {
     if (playerTurn.aiPlayer === false){
         tile.innerText = playerTurn.symbol
@@ -134,8 +135,7 @@ function makeMove (tile,tileIndex) {
 }
 
 ///////////////////////////////////////////////////////////
-///// AI EXECUTES RANDOM MOVE WITH VALID PARAMETERS //////
-/////////////////////////////////////////////////////////
+//////AI EXECUTES RANDOM MOVE WITH VALID PARAMETERS////////
 function makeMoveAI(){
     if (gameOverArea.classList.contains('hidden'))
     if (playerTurn.aiPlayer === true){
@@ -155,8 +155,7 @@ function makeMoveAI(){
 }
 
 ///////////////////////////////////////////////////////////
-////////////////CHECK FOR WINNING CONDITION///////////////
-/////////////////////////////////////////////////////////
+////////////////CHECK FOR WINNING CONDITION////////////////
 function checkWinner() {
 for (const winningCondition of winningConditions){
     const tile1 = winningCondition[0] - 1;
@@ -170,16 +169,16 @@ for (const winningCondition of winningConditions){
             winGameAnimation(tile1,tile2,tile3)
             gameOverScreen("WINNER IS O")
             addPointAnimation(playerO)
+            setTimeout(playerMoveHiddenTimer,200);
             setTimeout(removePointAnimationO,1000);
-            playerTurnMsg.className = 'playerMoveHidden'
             return
         } 
         else if (boardState[tile1] === "X"){
+            playerTurnMsg.className = 'playerMoveHidden'
             addPointAnimation(playerX)
             setTimeout(removePointAnimationX,1000);
             winGameAnimation(tile1,tile2,tile3)
             gameOverScreen("WINNER IS X")
-            playerTurnMsg.className = 'playerMoveHidden'
             return
         } 
         }
@@ -187,13 +186,14 @@ for (const winningCondition of winningConditions){
         //CHECK FOR DRAW//
         const checkBoardState = boardState.every((boardStateArray) => boardStateArray !== "")
         if (checkBoardState) {
-            gameOverScreen("IT IS A DRAW")
             playerTurnMsg.className = 'playerMoveHidden'
+            gameOverScreen("IT IS A DRAW")
             return
     } 
 }
+
 ///////////////////////////////////////////////////////////
-////////////CHECKS FOR IF GAME SHOULD CONTINUE////////////
+////////////CHECKS FOR IF GAME SHOULD CONTINUE/////////////
 function gameStatus() {
     const checkBoardState = boardState.every((boardStateArray) => boardStateArray !== "")
     if (checkBoardState === true) {
@@ -202,12 +202,12 @@ function gameStatus() {
 }
 
 ///////////////////////////////////////////////////////////
-///////////////RESET GAME PARAMETERS//////////////////////
+///////////////RESET GAME PARAMETERS///////////////////////
 function gameOverScreen(message) {
     setTimeout(aiOclass.classList.remove('selected'),2000)
     setTimeout(aiXclass.classList.remove('selected'),2000)
-    restartBtn.className = "restartGameHidden"
     playerTurnMsg.className = 'playerMoveHidden'
+    restartBtn.className = "restartGameHidden"
     gameOverArea.className = 'visible'
     gameOverText.innerText = message
         tiles.forEach((tile) => {    
@@ -216,7 +216,7 @@ function gameOverScreen(message) {
 }
 
 ///////////////////////////////////////////////////////////
-///////////////WINNING NUMBERS LIGHT UP///////////////////
+///////////////WINNING NUMBERS LIGHT UP////////////////////
 function winGameAnimation(index1,index2,index3){
     tiles[index1].className = 'tileWinningCombo'
     tiles[index2].className = 'tileWinningCombo'
@@ -245,7 +245,7 @@ function resetGameFunction() {
 }
 
 ///////////////////////////////////////////////////////////
-////////////////REFRESH SCORE COUNTER/////////////////////
+//////////////////REFRESH SCORE COUNTER////////////////////
 function refreshScores(){
     playerX.score = 0
     playerO.score = 0
@@ -259,7 +259,7 @@ function refreshScores(){
 }
 
 ///////////////////////////////////////////////////////////
-////////////////TILE OCCUPIED MESSAGE/////////////////////
+//////////////////TILE OCCUPIED MESSAGE////////////////////
 function inGameMessage(message){
     gameMessage.className = "gameMessageVisible"
     gameMessage.innerText = message
@@ -272,8 +272,6 @@ function fadeMessageTimer() {
 function hideMessageTimer() {
     gameMessage.className = "gameMessageHidden"
 }
-//********************************************************//
-///////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////
 ////////////////ADD POINT ANIMATION EFFECT/////////////////
@@ -288,11 +286,9 @@ function removePointAnimationX(){
 function removePointAnimationO(){
     playerO.scoreDisplay.className = "playeroScoreDisplay"
 }
-//********************************************************//
-///////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////
-/////////////BOARD RESET ANIMATION EFFECT/////////////////
+/////////////BOARD RESET ANIMATION EFFECT//////////////////
 function boardResetAnimation(){
     const boardContainer = document.querySelector("#board-container")
     boardContainer.className = "boardContainerAnimation"
@@ -301,19 +297,16 @@ function removeResetBoardAnimation(){
     const boardContainer = document.querySelector("#board-container")
     boardContainer.className = "boardContainer"
 }
-//********************************************************//
-///////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////
 /////////////         AI FUNCTIONS          //////////////
-/////////////////////////////////////////////////////////
-/////////////AI RANDOM MOVE IN SECONDS TIMER////////////
+/////////////AI RANDOM MOVE IN SECONDS TIMER//////////////
 function randomSeconds(){
         const randomNumber = Math.floor(Math.random() * 2 + 1)
         return randomNumber * 1000
 }
-//////SELECTS PLAYERX AS I FOR CALLBACK/////
+///////////////////////////////////////////////////////////
+/////////////SELECTS PLAYERX AS AI FOR CALLBACK/////////////
 function playerXasAI() {
     playerTurnMsg.className = "playerMoveHidden"
     aiXclass.className = 'selected'
@@ -322,13 +315,11 @@ function playerXasAI() {
     playerX.aiPlayer = true
     playerO.aiPlayer = false
     setTimeout(aiTurnMsgTimer,2000)
-    setTimeout(makeMoveAI,4000)
-    // setTimeout(resetGameFunction,300)
-    // setTimeout(setAiPlayer (playerO, playerX, aiXclass, aiOclass),100)
-    // setTimeout(setAiPlayer (playerX,playerO),000)
-    
+    setTimeout(makeMoveAI,4000)  
 }
-//////SELECTS PLAYERO AS I FOR CALLBACK/////
+
+///////////////////////////////////////////////////////////
+///////////SELECTS PLAYER O AS AI FOR CALLBACK/////////////
 function playerOasAI() {
     playerTurnMsg.className = "playerMoveHidden"
     aiOclass.className = 'selected'
@@ -336,25 +327,25 @@ function playerOasAI() {
     resetGameFunction()
     playerX.aiPlayer = false
     playerO.aiPlayer = true
-    playerTurnMsg.className = "playerMoveVisible"
     setTimeout(playerTurnMsgTimer,3000)
-        // setTimeout(resetGameFunction,200)
-    // setTimeout(setAiPlayer (playerO, playerX, aiOclass, aiXclass),200)
 }
-/////////////PLAYER TURN MESSAGE VS AI////////////
+
+///////////////////////////////////////////////////////////
+//////////////////PLAYER TURN MESSAGE VS AI////////////////
 function playerTurnMsgTimer () {
     playerTurnMsg.innerText = "IT'S YOUR TURN"
     playerTurnMsg.className = "playerMoveVisible"
 }
-/////////////AI TURN MESSAGE////////////
+
+///////////////////////////////////////////////////////////
+///////////////////AI TURN MESSAGE/////////////////////////
 function aiTurnMsgTimer () {
     playerTurnMsg.innerText = "COMPUTER IS THINKING..."
     playerTurnMsg.className = "computerMoveVisible"
 }
-// function setAiPlayer (ai,human,aiClass1,aiClass2){
-//     ai.aiPlayer = true
-//     human.aiPlayer = false
-//     aiClass1.className = 'selected'
-//     aiClass2.classList.remove('selected')
-//     playerTurnMsg.className = "playerMoveVisible"
-// }
+
+///////////////////////////////////////////////////////////
+//////////////////REMOVE MESSAGE FOR PLAYER////////////////
+function playerMoveHiddenTimer () {
+    playerTurnMsg.className = "playerMoveHidden"
+}

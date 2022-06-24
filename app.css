@@ -5,59 +5,58 @@
   0% { opacity: 0; }
   100% { opacity: 1}
 }
+/* ------------------------------------- */
+
 
 /* ------------------------------------- */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* ------------------------------------- */
-/*          GLOBAL STYLES                */
+/*            GLOBAL STYLES              */
 /* ------------------------------------- */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    color: #ddd;
-    font-family: 'Play', sans-serif;
-    font-weight: 700;
-    cursor:default;
+  box-sizing: border-box;
+  margin: 0;
+  color: #ddd;
+  font-family: 'Play', sans-serif;
+  font-weight: 700;
+  cursor:default;
 }
+/* ------------------------------------- */
+
 
 /* ------------------------------------- */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* ------------------------------------- */
-/*           BODY STYLING                */
+/*            BODY STYLING               */
 /* ------------------------------------- */
 body {
-    min-height: 500px;
-    max-height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #151b29;
+  min-height: 500px;
+  max-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #151b29;
 }
-
 /* ------------------------------------- */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+
 /* ------------------------------------- */
 /*           WEBPAGE HEADING             */
 /* ------------------------------------- */
 .heading {
-    margin-bottom: 400px;
-    font-size: 50px;
+  margin-bottom: 400px;
+  font-size: 50px;
 }
+/* ------------------------------------- */
+
 
 /* ------------------------------------- */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* ------------------------------------- */
-/*          GRID CONTAINER SETTINGS      */
+/*       PLAYING BOARD AND TILES         */
 /* ------------------------------------- */
 .boardContainer{
-    position: fixed;
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    width: 300px;
-    height: 300px;
-    transition: 1s;
+  position: fixed;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  width: 300px;
+  height: 300px;
+  transition: 1s;
 }
-
 .boardContainerAnimation{
   position: fixed;
   display: grid;
@@ -68,9 +67,43 @@ body {
   opacity: 0;
   transition: 2s;
 }
-
+  /*CELL BORDER DISPLAYS*/
+  .tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    font-size: 100px;
+    margin: 5px;
+    border-radius: 3px;
+    border: 2px solid #ddd;
+    opacity: 0.8;
+    transition: 0.1s ease-out;
+  }
+  .tile:hover {
+    border-color: #858b97;
+    box-shadow: 1px 1px 3px #343d52;
+    transform: translateY(-5px);
+    transition: 0.3s ease-in;
+  }
+  /*WINNING COMBINATION ANIMATION*/
+  .tileWinningCombo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      font-size: 100px;
+      margin: 5px;
+      border-radius: 3px;
+      border: 2px solid #ddd;
+      color: #f1ff5c;
+      transform: translateY(-0.03em);
+      opacity: 1;
+      transition: 0.2s ease-in;
+  }
 /* ------------------------------------- */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+
 /* ------------------------------------- */
 /*           RESTART GAME BUTTON         */
 /* ------------------------------------- */
@@ -87,7 +120,6 @@ body {
   border-radius:3px;
   transition: 2s;
 }
-
 #restartBtn.restartGameVisible {
   display: flex;
   justify-content: center;
@@ -102,175 +134,138 @@ body {
   border-radius:3px;
   transition: 2s;
 }
-
 #restartBtn.restartGameVisible:hover {
   border-color: #858b97;
   background-color: #858b97;
   box-shadow: 3px 3px 5px #343d52;
   transform: translateY(-8px);
 } 
+/* ------------------------------------- */
+
 
 /* ------------------------------------- */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/*            SCOREBOARD DESIGN          */
 /* ------------------------------------- */
-/*      SCOREBOARD DESIGN PROPERTIES     */
-/* ------------------------------------- */
-.score {
-  display: flex;
-  flex-flow: row wrap;
-  position: absolute;
-  margin-top: 680px;
-  margin-right: 800px;
-  width: 250px;
-  height: 170px;
-  padding-top: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  gap: 5px;
-  opacity: 0.7;
-  font-size: 25px;
-}
-
-.scoreboardTitle {
-  margin-top: 40px;
-  height: 40px;
-  width: 100%;
-}
-
-/* *** *//* *** *//* *** *//* *** *//* *** */
-/*       REFRESH SCORE BUTTON EFFECT       */
-/* *** *//* *** *//* *** *//* *** *//* *** */
-.refreshImgContainer{
-  display: flex;
-  position: absolute;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  margin-left: 185px;
-  margin-top: 30px;
-  transition: 1s;
-}
-
-.refreshScoreBtn:hover{
-  transition: 1s;
-  transform: rotate(180deg) scaleX(1.5) scaleY(1.5);
-  opacity: 1;
-}
-.refreshScoreBtn:active{
-  transform: rotate(360deg) scaleX(1.5) scaleY(1.5);
-  transition: 0.3s;
-  opacity: 1;
- }
-
-.refreshScoreBtn {
-  transition: 1s;
-  justify-self: center;
-  width: 20px;
-  height: 20px;
-}
-/* *** *//* *** *//* *** *//* *** *//* *** */
-
-
-.playerxScoreLabel, .playeroScoreLabel{
-  padding-top: 10px;
-  padding-bottom: 10px;
-  display:flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 20px;
-}
-
-.playerxScoreLabel{
-    border-bottom: 0.5px solid #ddd;;
-    border-top: 0.5px solid #ddd;;
-}
-
-.playeroScoreDisplay, .playerxScoreDisplay{
-    display:flex;
-    flex-basis: 20%;
-    align-items: center;
-    margin: 0 auto;
-    width: 150px;
-    padding-left: 93px;
-    transition: ease-in-out 0.3s;
-}
-
-/* *** *//* *** *//* *** *//* *** *//* *** */
-/*    POINT MANIPULATION BUTTON EFFECTS    */
-/* *** *//* *** *//* *** *//* *** *//* *** */
-.winPoint{
-  display:flex;
-  flex-basis: 20%;
-  align-items: center;
-  margin: 0 auto;
-  width: 150px;
-  padding-left: 93px;
-  transform: translateY(-8px);
-  transition: ease-in-out 0.3s;
-  color: #f1ff5c;
-}
-
-.resetPointAnimation{
-  display:flex;
-  flex-basis: 20%;
-  align-items: center;
-  margin: 0 auto;
-  width: 150px;
-  padding-left: 93px;
-  transform: translateY(8px);
-  transition: ease-in-out 0.3s;
-  color: #343d52;
-  opacity: 0;
-}
-
-/* *** *//* *** *//* *** *//* *** *//* *** */
-/* CELL BORDER DISPLAYS (9X9 GRID OUTLINE) */
-/* *** *//* *** *//* *** *//* *** *//* *** */
-.tile {
+  /* CONTAINER */
+  .score {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    font-size: 100px;
-    margin: 5px;
-    border-radius: 3px;
-    border: 2px solid #ddd;
-    opacity: 0.8;
-    transition: 0.1s ease-out;
-    visibility:visible;
-}
-
-.tile:hover {
-  transition: 0.3s ease-in;
-  border-color: #858b97;
-  box-shadow: 1px 1px 3px 	#343d52;
-  transform: translateY(-5px);
-}
-
-/* *** *//* *** *//* *** *//* *** *//* *** */
-/*      WINNING COMBINATION ANIMATION      */
-/* *** *//* *** *//* *** *//* *** *//* *** */
-.tileWinningCombo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    font-size: 100px;
-    margin: 5px;
-    border-radius: 3px;
-    border: 2px solid #ddd;
-    color: #f1ff5c;
-    transform: translateY(-0.03em);
-    opacity: 1;
-    transition: 0.2s ease-in;
+    flex-flow: row wrap;
+    position: absolute;
+    margin-top: 680px;
+    margin-right: 800px;
+    width: 250px;
+    height: 170px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    gap: 5px;
+    opacity: 0.7;
+    font-size: 25px;
   }
+    .scoreboardTitle {
+      margin-top: 40px;
+      height: 40px;
+      width: 100%;
+    }
+
+    /*REFRESH SCORE BUTTON EFFECT*/
+    .refreshImgContainer{
+      display: flex;
+      position: absolute;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      margin-left: 185px;
+      margin-top: 30px;
+      transition: 1s;
+    }
+      .refreshScoreBtn {
+        justify-self: center;
+        width: 20px;
+        height: 20px;
+        transition: 1s;
+      }
+      .refreshScoreBtn:hover{
+        opacity: 1;
+        transform: rotate(180deg) scaleX(1.5) scaleY(1.5);
+        transition: 1s;
+      }
+      .refreshScoreBtn:active{
+        opacity: 1;
+        transform: rotate(360deg) scaleX(1.7) scaleY(1.7);
+        transition: 0.3s;
+      }
+
+    /*PLAYER SCORE LABELS*/
+    .playeroScoreLabel{
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 20px;
+    }
+    .playerxScoreLabel {
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 20px;
+      border-bottom: 0.5px solid #ddd;;
+      border-top: 0.5px solid #ddd;;
+    }
+    .playeroScoreDisplay, .playerxScoreDisplay{
+      display:flex;
+      flex-basis: 20%;
+      align-items: center;
+      margin: 0 auto;
+      width: 150px;
+      padding-left: 93px;
+      transition: 2s;
+    }
+      /*POINT ANIMATIONS*/
+      .winPoint{
+        display:flex;
+        flex-basis: 20%;
+        align-items: center;
+        margin: 0 auto;
+        width: 150px;
+        padding-left: 93px;
+        color: #f1ff5c;
+        transform: translateY(-6px);
+        transition: 0.3s;
+      }
+      .resetPointAnimation{
+        display:flex;
+        flex-basis: 20%;
+        align-items: center;
+        margin: 0 auto;
+        width: 150px;
+        padding-left: 93px;
+        color: #343d52;
+        opacity: 0;
+        transform: translateY(6px);
+        transition: 0.3s;
+      }
+/* ------------------------------------- */
+
+
 
 /* ------------------------------------- */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/*        GAMEOVER SCREEN DISPLAY        */
 /* ------------------------------------- */
-/*   GAMEOVER DISPLAY DESIGN PROPERTIES  */
-/* ------------------------------------- */
+#game-over-area.visible {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  align-items: center;
+  margin-top: 500px;
+  width: 700px;
+  height: 200px;
+  transition: 2s;
+}
 #game-over-area.hidden {
     display: flex;
     flex-direction: column;
@@ -281,42 +276,33 @@ body {
     opacity: 0;
     transition: 2s;
   }
-#game-over-area.visible {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  align-items: center;
-  width: 700px;
-  height: 200px;
-  margin-top: 500px;
-  transition: 2s;
-}
-.gameOverText {
-  margin-top: 30px;
-  font-size: 70px;
-  }
-.playAgain {
-  margin-top: 26px;
-  width: 250px;
-  height: 55px;
-  font-size: 25px;
-  color: #343d52;
-  background-color: #ddd	;
-  border-radius: 3px;
-  transition: 2s;
-  }
-.playAgain:hover{
-  border-color: 	#858b97;
-  background-color: #858b97;
-  box-shadow: 3px 3px 5px	#343d52;
-  transform: translateY(-8px);
-}
-
+  .gameOverText {
+    margin-top: 30px;
+    font-size: 70px;
+    }
+  .playAgain {
+    margin-top: 26px;
+    width: 250px;
+    height: 55px;
+    font-size: 25px;
+    color: #343d52;
+    background-color: #ddd	;
+    border-radius: 3px;
+    transition: 2s;
+    }
+  .playAgain:hover{
+    border-color: #858b97;
+    background-color: #858b97;
+    box-shadow: 3px 3px 5px	#343d52;
+    transform: translateY(-8px);
+    }
 /* ------------------------------------- */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+
 /* ------------------------------------- */
 /*          PLAYER TURN MESSAGE          */
 /* ------------------------------------- */
+/* HUMAN PLAYER VISIBLE/HIDDEN */
 .playerMoveVisible {
   position: fixed;
   margin-top: 630px;
@@ -330,10 +316,11 @@ body {
   margin-top: 630px;
   margin-right: -900px;
   font-size: 20px;
-  transform: scaleX(0) scaleY(0);
   opacity: 0;
+  transform: scaleX(0) scaleY(0);
   transition: 2s;
 }
+/* COMPUTER MOVE VISIBLE/HIDDEN */
 .computerMoveVisible {
   position: fixed;
   margin-top: 630px;
@@ -347,25 +334,16 @@ body {
   margin-top: 630px;
   margin-right: -900px;
   font-size: 20px;
-  transform: scaleX(0) scaleY(0);
   opacity: 0;
+  transform: scaleX(0) scaleY(0);
   transition: 2s;
 }
+/* ------------------------------------- */
+
 
 /* ------------------------------------- */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/*            ALERT GAME MESSAGE         */
 /* ------------------------------------- */
-/*            ALT GAME MESSAGE           */
-/* ------------------------------------- */
-#game-message.gameMessageHidden {
-  position: fixed;
-  margin-left: 670px;
-  margin-bottom: -290px;
-  font-size: 35px;
-  transition: 1s;
-  opacity: 0;
-}
- 
 #game-message.gameMessageVisible {
   position: fixed;
   margin-left: 670px;
@@ -384,11 +362,20 @@ color:#ffa260;
 opacity: 0;
 transition: 1s;
 }
+#game-message.gameMessageHidden {
+  position: fixed;
+  margin-left: 670px;
+  margin-bottom: -290px;
+  font-size: 35px;
+  opacity: 0;
+  transition: 1s;
+}
+/* ------------------------------------- */
+
+
 
 /* ------------------------------------- */
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* ------------------------------------- */
-/*            AI SELECTOR MESSAGE        */
+/*            AI SELECTOR MENU           */
 /* ------------------------------------- */
 .ai-button-container {
   display: flex;
@@ -396,112 +383,97 @@ transition: 1s;
   position: fixed;
   margin-top: 925px;
   margin-right: 10px;
+  padding-left: 8px;
   width: 400px;
   height: 250px;
-  padding-top: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  opacity: 0.7;
-  font-size: 20px;
 } 
-
 #aiButton {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items:center;
-  position: fixed;
   width: 400px;
   height: 150px;
   font-size: 25px;
   color: #ddd;
   border-radius: 3px;
   transition: 2s; 
-
+}
+  /* CHOOSE AI PLAYER TITLE TEXT */
+  .aiInfo {
+    font-size: 25px;
+    padding: 10px;
+    margin-bottom: 90px;
+    color: #ddd;
   }
-
-/* CHOOSE AI PLAYER TEXT */
-.aiInfo {
-  font-size: 25px;
-  padding: 10px;
-  margin-bottom: 90px;
-  color: #ddd;
-}
-
-/* AI PLAYER X CLASS SELECTOR BUTTON */
-#aiXclass {
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  margin-top: 5px;
-  margin-right: 130px;
-  width: 100px;
-  height: 35px;
-  padding: 1px;
-  border-radius: 3px;
-  background-color: #ddd;
-  color: #343d52;
-  transition: 2s;
-}
-
-/* AI PLAYER O CLASS SELECTOR BUTTON */
-#aiOclass {
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  margin-left: 130px;
-  margin-top: 5px;
-  width: 100px;
-  height: 35px;
-  padding: 1px;
-  border-radius: 3px;
-  background-color: #ddd;
-  color: #343d52;
-  transition: 2s;
-}
-
-#aiXclass:hover, #aiOclass:hover {
-  border-color: 	#858b97;
-  background-color: #858b97;
-  box-shadow: 3px 3px 5px	#343d52;
-  transform: translateY(-3px)
-}
-
-/* AI PLAYER X CLASS SELECTOR BUTTON (WHEN ACTIVE)*/
-#aiXclass.selected {
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  margin-top: 5px;
-  margin-right: 130px;
-  width: 100px;
-  height: 35px;
-  padding: 1px;
-  border-radius: 3px;
-  background-color: #ffa260;
-  color: #343d52;
-  transition: 2s;
-}
-
-/* AI PLAYER O CLASS SELECTOR BUTTON (WHEN ACTIVE) */
-#aiOclass.selected {
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  margin-left: 130px;
-  margin-top: 5px;
-  width: 100px;
-  height: 35px;
-  padding: 1px;
-  border-radius: 3px;
-  background-color: #ffa260;
-  color: #343d52;
-  transition: 2s;
-}
-/* ------------------------------------- */
-/* ------------------------------------- */
+  /* AI PLAYER X CLASS SELECTOR BUTTON */
+  #aiXclass {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    margin-top: 5px;
+    margin-right: 130px;
+    width: 100px;
+    height: 35px;
+    padding: 1px;
+    border-radius: 3px;
+    background-color: #ddd;
+    color: #343d52;
+    transition: 2s;
+  }
+  /* AI PLAYER O CLASS SELECTOR BUTTON */
+  #aiOclass {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    margin-left: 130px;
+    margin-top: 5px;
+    width: 100px;
+    height: 35px;
+    padding: 1px;
+    border-radius: 3px;
+    background-color: #ddd;
+    color: #343d52;
+    transition: 2s;
+  }
+  /* AI PLAYER X CLASS SELECTOR BUTTON (WHEN ACTIVE)*/
+  #aiXclass.selected {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    margin-top: 5px;
+    margin-right: 130px;
+    width: 100px;
+    height: 35px;
+    padding: 1px;
+    border-radius: 3px;
+    background-color: #ffa260;
+    color: #343d52;
+    transition: 2s;
+  }
+  /* AI PLAYER O CLASS SELECTOR BUTTON (WHEN ACTIVE) */
+  #aiOclass.selected {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    margin-left: 130px;
+    margin-top: 5px;
+    width: 100px;
+    height: 35px;
+    padding: 1px;
+    border-radius: 3px;
+    background-color: #ffa260;
+    color: #343d52;
+    transition: 2s;
+  }
+  #aiXclass:hover, #aiOclass:hover {
+    border-color: #858b97;
+    background-color: #858b97;
+    box-shadow: 3px 3px 5px	#343d52;
+    transform: translateY(-3px)
+  }
 /* ------------------------------------- */
