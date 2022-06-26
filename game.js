@@ -55,7 +55,6 @@ const winningConditions = [
     [1, 5, 9],
     [3, 5, 7],
   ];
-
 ///////////////////////////////////////////////////////////
 /////SELECT AI AS PLAYER ON CLICK (RESPECTIVE BUTTONS)/////
 aiXclass.addEventListener('click', playerXasAI)
@@ -139,17 +138,21 @@ function makeMove (tile,tileIndex) {
 function makeMoveAI(){
     if (gameOverArea.classList.contains('hidden'))
     if (playerTurn.aiPlayer === true){
-        for (let i = 1; i < 10; i++){
-            const random = Math.floor(Math.random() * 10)
-            if (boardState[random -1] === ""){
-                boardState[random -1] = playerTurn.symbol
-                tiles[random -1].innerText = playerTurn.symbol
-                checkWinner()
-                playerTurn = playerTurn === playerO ? playerX : playerO
-                playerTurnMsg.className = "playerMoveVisible"
-                playerTurnMsg.innerText = "IT'S YOUR TURN"
-                return
-        }  
+        for (win of winningConditions){         //winning arrays
+            let board = boardState
+            if (board[win-1] === "" || playerTurn.symbol){
+                for(winNum of win){             //num in winning combination
+                    if (board[winNum -1] === ""){
+                        boardState[winNum -1] = playerTurn.symbol
+                        tiles[winNum -1].innerText = playerTurn.symbol
+                        checkWinner()
+                        playerTurn = playerTurn === playerO ? playerX : playerO
+                        playerTurnMsg.className = "playerMoveVisible"
+                        playerTurnMsg.innerText = "IT'S YOUR TURN"
+                        return
+                    }            
+                }
+            }
         }
     } 
 }
