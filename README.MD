@@ -1,7 +1,7 @@
 # About the application
 This application is a simple recreation of the popular Tic-Tac-Toe game.
 
-This was my first solo project completed in week 3 of General Assembly's Software Engineering Immersive 12 week bootcamp. It cann be accessed via this link: https://joshualev.github.io/
+This was my first solo project completed in week 3 of General Assembly's Software Engineering Immersive 12 week bootcamp. It cann be accessed via this link: https://joshualev.github.io/Tic-tac-toe/
 
 ## This application was built with
 1. `HTML`
